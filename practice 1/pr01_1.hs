@@ -31,6 +31,7 @@ module Pr01_1 where
 
 -}
 import Prelude --for zip
+import Data.ByteString.Builder.Prim (primMapByteStringFixed)
 
 -- myFST, mySND, myTHRD : 
 
@@ -75,7 +76,7 @@ myDrop n (x : xs) = myDrop (n - 1) xs
 --myProduct
 myProduct :: [Int] -> Int 
 myProduct [] = 1
-myProduct (x : xs) = x *(myProduct xs) -- myProduct (x : xs) = foldr (*) 1 xs extension suggested this 
+myProduct (x : xs) = x * myProduct xs -- myProduct (x : xs) = foldr (*) 1 xs extension suggested this 
 
 
 --myZip
@@ -100,16 +101,80 @@ myUnzip((a , b) : rest) =
     in (a : as, b: bs)
         
 -- second part : 
+--myFilter (1)
+myFilter :: (a -> Bool) -> [a] -> [a]
+myFilter _ [] = []
+myFilter f (x : xs) 
+    | f x == True = x : myFilter f xs  -- syntax note from extension : f x == true :: f x 
+    | f x == False = myFilter f xs     -- f x == false :: (f x)
 
+--myFilter (2)
+myFilter2 :: (a -> Bool) -> [a] -> [a]
+myFilter2 _ [] = [] 
+myFilter2 f (x : xs)= 
+    if f x 
+        then x : myFilter2 f xs 
+    else 
+        myFilter2 f xs 
 
+--myMap 
 
 myMap :: (a -> b) -> [a] -> [b]
 myMap _ [] = []
 myMap f (x :xs) = f x : myMap f xs
 
+--myzipWith
 
 myzipWith :: (a-> b -> c) -> [a] -> [b] -> [c]
-myzipWith f [] xs = [] -- myzipWith _ [] _ = []
-myzipWith f xs [] = [] -- myzipWith _ _ [] = []
+myzipWith f [] _ = [] 
+myzipWith f _ [] = [] 
 myzipWith f (x : xs) (y:ys) = f x y : myzipWith f xs ys 
 
+--myZipWith3
+
+myZipWith3 :: (a -> b -> c-> d) -> [a] -> [b] -> [c] -> [d]
+myZipWith3 f [] _ _ = []
+myZipWith3 f _ [] _ = []
+myZipWith3 f _ _ [] = []
+myZipWith3 f (x : xs) (y : ys) (z : zs) = f x y z : myZipWith3 f xs ys zs 
+
+--test case : 
+testzip3 = myZipWith3 (\a b c -> a+b+c) [1,2,3] [4,5,6][7,8,9]
+
+--myAll : 
+myAll :: (a -> Bool) -> [a] -> Bool 
+--myAll _ [] = error "empty list"
+myAll f [] = True
+myAll f (x : xs) 
+    | f x = myAll f xs 
+    | not (f x) = False -- can use otherwise here also ? 
+
+myAll2 :: (a -> Bool) -> [a] -> Bool
+--myAll2 _ [] = error "empty list"
+myAll2 f [] = True
+myAll2 f (x : xs) = 
+    if f x 
+        then myAll2 f xs
+    else 
+        False
+
+--myAny 
+
+myAny :: (a -> Bool) -> [a] -> Bool
+myAny f [] = False
+myAny f (x : xs)
+    | not (f x) = myAny f xs 
+    | otherwise = True
+
+myAny2 :: (a -> Bool) -> [a] -> Bool 
+myAny2 f [] = False 
+myAny2 f (x : xs) = 
+    if not (f x)               -- extension note :  "not (not (f x)) || myAny2 f xs" instead of the if else block
+        then myAny2 f xs
+    else 
+        True
+
+--myComposition (for functions of 2 variables)
+
+myComposition :: (b -> c) -> (a -> b) -> a -> c
+myComposition f g x = f (g x) 
