@@ -1,9 +1,7 @@
 -------------------------------------
 -- Практические задание 1. Часть 1 --
 -------------------------------------
--- *********Anari FP 
--- ********* practice 01 ... 05 - report 
--- ************** commits have to be postepenna hahahahahahahahah 
+
 module Pr01_1 where
 
 {-
