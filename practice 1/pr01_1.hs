@@ -174,7 +174,7 @@ myAny2 f (x : xs) =
     else 
         True
 
---myComposition (for functions of 2 variables)
+--myComposition (for functions of 1 arguement type a -> b)
 
 myComposition :: (b -> c) -> (a -> b) -> a -> c
 myComposition f g x = f (g x) 
