@@ -4,6 +4,11 @@
 
 module Pr01_2 where
 import GHC.Base (BCO, DoubleBox)
+import Distribution.Simple.LocalBuildInfo (prefixRelativeComponentInstallDirs)
+--import Lec04 (Ingredients(BakingPowder))
+--import Lec04 (CakeDough(ChocolateCakeDough))
+
+
 
 {-
 
@@ -136,3 +141,158 @@ myUnfoldr f b = myMaybe [] (\(x, next) -> x : myUnfoldr f next) (f b)
 
 --random test case
 asd2 = myUnfoldr (\n -> if n == 0 then Nothing else Just (n, n-1)) 5
+
+
+--types 
+--random practice
+data Drink = Tea | Coffee | Juice 
+
+drinkTemp :: Drink -> String 
+drinkTemp Tea = "hot"
+drinkTemp Coffee = "hot"
+drinkTemp Juice = "cold"
+
+data Planet = Saturn | Jupiter | Earth
+hasrings :: Planet -> Bool
+hasrings Saturn= True 
+hasrings Jupiter = True
+hasrings Earth= False
+
+
+data Shape = Circle Double | Rect Double Double
+
+perimeter :: Shape -> Double 
+perimeter (Circle r) = 3.14 * 2 * r
+perimeter (Rect w h) = w*2 + h*2 
+
+--pizza : 
+data Base = Thinbase | ThickBase deriving Show
+data Sause = Tomatosause | Creamsause deriving Show
+data Pizza = Margarita | Pepperoni | Vegge deriving Show
+
+makePizza :: Maybe Base -> Maybe Sause -> Maybe Pizza
+makePizza (Just Thinbase) (Just Tomatosause) = Just Margarita
+makePizza (Just ThickBase) (Just Tomatosause) = Just Pepperoni
+makePizza (Just ThickBase) (Just Creamsause) = Just Vegge
+-- makePizza (Just Thinbase) (Just Creamsause) = Nothing -- redundant
+--how to write anything else = Nothing ?
+makePizza _ _ = Nothing 
+
+describePizza :: Maybe Pizza -> String
+describePizza (Just Vegge) = "thick base + creamsause"
+describePizza (Just Margarita) = " Thinbase + tomato sause"
+describePizza (Just Pepperoni) = "thicbase + tomatosauce"
+describePizza Nothing = "Nothing?"
+--how to write any other? 
+--can use this cause pattern checking is top to bottom!
+
+
+--cakes 
+--commenting it for less headache
+{-
+data Cake = ChocolateCake | BananaCake | CherryCake deriving Show 
+data Ingredients = Oil | Chocolate | Egg | Flour | Sugar | Bakingpowder | Banana | Cherry deriving Show
+data Fillingmix = Oilchocolatemix | Bananmix | Cherrymix deriving Show
+data Dough = CakeDough deriving Show
+data Cakedough = ChocolateDough | BananaDough | CherryDough deriving Show 
+
+
+-- Функции, которые описывают процесс приготовления частей торта
+makeCakeMix ::  Ingredients ->  Ingredients ->  Fillingmix
+makeCakeMix  Oil Chocolate = Oilchocolatemix
+makeCakeMix Chocolate Oil = Oilchocolatemix
+-- ...
+makeCakeMix Banana Oil = Bananmix 
+makeCakeMix Oil Banana = Bananmix 
+makeCakeMix Cherry Sugar = Cherrymix 
+makeCakeMix Sugar Cherry = Cherrymix
+
+cakeDough :: Ingredients -> Ingredients -> Ingredients -> Ingredients -> Dough
+cakeDough Egg Flour Sugar Bakingpowder = CakeDough
+-- ...
+
+--i will make a new one
+{-
+chocolateCakeDough :: Dough -> Fillingmix -> Cakedough
+chocolateCakeDough CakeDough Oilchocolatemix = ChocolateDough
+-- ...-}
+cakeDoughFinal :: Dough -> Fillingmix -> Cakedough
+cakeDoughFinal CakeDough Oilchocolatemix = ChocolateDough 
+cakeDoughFinal CakeDough Bananmix = BananaDough
+cakeDoughFinal CakeDough Cherrymix = CherryDough
+
+--will also make a new one:
+--Also error on not caps on "c" ? it will make it a variable wwhich will match anything?
+{-
+chocolateCake :: Cakedough -> Action -> Cake
+chocolateCake ***c***hocolateCakeDough Bake = ChocolateCake
+-- ... -}
+data Action = Bake deriving Show
+makeCake :: Cakedough -> Action ->Cake
+makeCake ChocolateDough Bake = ChocolateCake
+makeCake BananaDough Bake = BananaCake
+makeCake CherryDough Bake = CherryCake
+-}
+--examples 
+data Stock = Apples Int | Milk Double deriving Show 
+useApples :: Int -> Stock -> Maybe Stock
+useApples m (Apples n) 
+    | n > m = Just (Apples (n-m))
+    |otherwise = Nothing  
+
+useApples _ _ = Nothing 
+
+data Ingredients = Oil Double 
+                |Chocolate Double
+                |Egg Int
+                |Flour Double
+                |Sugar Double
+                |Bakingpowder Double
+                |Banana Int
+                |Cherry Int 
+                deriving Show 
+
+data Cake = ChocolateCake | BananaCake | CherryCake deriving Show 
+data Fillingmix = Oilchocolatemix | Bananamix | Cherrymix deriving Show
+data Dough = CakeDough deriving Show
+data Cakedough = ChocolateDough | BananaDough | CherryDough deriving Show 
+data Action = Bake Int deriving Show 
+-- Функции, которые описывают процесс приготовления частей торта
+makeCakeMix ::  Maybe Ingredients ->  Maybe Ingredients ->  Maybe Fillingmix
+makeCakeMix  (Just (Oil n)) (Just (Chocolate m )) 
+            | n>100 && n<150 && m > 200 && 250>m= Just Oilchocolatemix
+makeCakeMix  (Just (Chocolate n)) (Just (Oil m )) 
+            | m>100 && m<150 && n > 200 && 250>n= Just Oilchocolatemix
+
+makeCakeMix  (Just (Banana n)) (Just (Oil m )) 
+            | n>2 && n<5 && m > 100 && 150>m= Just Bananamix
+makeCakeMix  (Just (Oil n)) (Just (Banana m )) 
+            | n>100 && n<150 && m > 2 && 5>m= Just Bananamix    
+
+makeCakeMix  (Just (Cherry n)) (Just (Sugar m )) 
+            | n>5 && n<20 && m > 100 && 150>m= Just Cherrymix
+makeCakeMix  (Just (Sugar n)) (Just (Cherry m )) 
+            | n>100 && n<150 && m > 5 && 20>m= Just Cherrymix
+makeCakeMix _ _ = Nothing 
+                                 
+
+cakeDough :: Maybe Ingredients -> Maybe Ingredients -> Maybe Ingredients -> Maybe Ingredients -> Maybe Dough
+cakeDough (Just (Egg n)) (Just (Flour m)) (Just (Sugar s)) (Just (Bakingpowder b))
+    | n > 2 && n < 4 && m > 100 && m < 150 && s > 200 && s < 250 && b >50 && b <75 = Just CakeDough
+
+cakeDough _ _ _ _ = Nothing 
+
+cakeDoughFinal :: Maybe Dough -> Maybe Fillingmix -> Maybe Cakedough 
+cakeDoughFinal (Just CakeDough) (Just Oilchocolatemix) = Just ChocolateDough
+cakeDoughFinal (Just CakeDough)(Just Cherrymix) = Just CherryDough
+cakeDoughFinal (Just CakeDough) (Just Bananamix) = Just BananaDough
+cakeDoughFinal _ _ = Nothing 
+
+makeCake :: Maybe Cakedough -> Maybe Action -> Maybe Cake 
+makeCake (Just ChocolateDough) (Just (Bake t)) 
+    |t > 15 && t < 20 = Just ChocolateCake 
+makeCake (Just BananaDough) (Just (Bake t)) 
+    |t > 15 && t < 20 = Just BananaCake
+makeCake (Just CherryDough) (Just (Bake t)) 
+    |t > 15 && t < 20 = Just CherryCake
+makeCake _ _ = Nothing    
