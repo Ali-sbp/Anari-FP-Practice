@@ -313,3 +313,9 @@ testdough = cakeDough (Just (Egg 3))(Just (Flour 101))(Just (Sugar 201))(Just (B
 testfinaldough = cakeDoughFinal (Just CakeDough)(Just Cherrymix) 
 
 testmake = makeCake(Just CherryDough) (Just (Bake 16))
+
+funC :: Either a b -> (a -> b) -> b 
+funC (Left a) f = f a 
+funC (Right b) f= b 
+
+testF = funC (Right 3) (+1)
