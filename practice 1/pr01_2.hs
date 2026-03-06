@@ -88,7 +88,6 @@ myFoldl12 f (x:y:ys) = myFoldl12 f (f x y : ys)
 myFoldr :: (a -> b -> b) -> b -> [a] -> b 
 myFoldr f b [] = b
 myFoldr f b (x:xs) = x `f` (myFoldr f b xs)  
-
 --myFoldr1
 
 myFoldr1 :: (a -> a -> a) -> [a] -> Maybe a
