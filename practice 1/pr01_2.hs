@@ -72,7 +72,17 @@ myReverse xs = myFoldl (\f x -> x : f) [] xs
 --myFoldl1
 myFoldl1 :: (a->a->a) -> [a] -> a 
 myFoldl1 f [] = error " asd "
-myFoldl1 f (x:xs) = myFoldl f x xs 
+--myFoldl1 f [a] = a 
+myFoldl1 f (x:xs) = jhonny x xs
+    where
+        jhonny acc []= acc 
+        jhonny acc (y:ys) = jhonny (f acc y) ys 
+--TODO1 done 
+myFoldl12 :: (a -> a -> a) -> [a] -> a
+myFoldl12 f []       = error "empty list"
+myFoldl12 f [x]      = x
+myFoldl12 f (x:y:ys) = myFoldl12 f (f x y : ys)
+
 
 --myFoldr , wasted 2 hours and ended up not using it in the fucking implementation!
 myFoldr :: (a -> b -> b) -> b -> [a] -> b 
@@ -280,6 +290,7 @@ cakeDough :: Maybe Ingredients -> Maybe Ingredients -> Maybe Ingredients -> Mayb
 cakeDough (Just (Egg n)) (Just (Flour m)) (Just (Sugar s)) (Just (Bakingpowder b))
     | n > 2 && n < 4 && m > 100 && m < 150 && s > 200 && s < 250 && b >50 && b <75 = Just CakeDough
 
+
 cakeDough _ _ _ _ = Nothing 
 
 cakeDoughFinal :: Maybe Dough -> Maybe Fillingmix -> Maybe Cakedough 
@@ -296,3 +307,10 @@ makeCake (Just BananaDough) (Just (Bake t))
 makeCake (Just CherryDough) (Just (Bake t)) 
     |t > 15 && t < 20 = Just CherryCake
 makeCake _ _ = Nothing    
+
+
+testmix = makeCakeMix  (Just (Sugar 101)) (Just (Cherry 10))
+testdough = cakeDough (Just (Egg 3))(Just (Flour 101))(Just (Sugar 201))(Just (Bakingpowder 51))
+testfinaldough = cakeDoughFinal (Just CakeDough)(Just Cherrymix) 
+
+testmake = makeCake(Just CherryDough) (Just (Bake 16))
