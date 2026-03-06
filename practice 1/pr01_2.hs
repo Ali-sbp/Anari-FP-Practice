@@ -70,9 +70,9 @@ myReverse xs = myFoldl (\f x -> x : f) [] xs
 
 
 --myFoldl1
-myFoldl1 :: (a->a->a) -> [a] -> Maybe a 
-myFoldl1 f [] = Nothing 
-myFoldl1 f (x:xs) = Just (myFoldl f x xs)
+myFoldl1 :: (a->a->a) -> [a] -> a 
+myFoldl1 f [] = error " asd "
+myFoldl1 f (x:xs) = myFoldl f x xs 
 
 --myFoldr , wasted 2 hours and ended up not using it in the fucking implementation!
 myFoldr :: (a -> b -> b) -> b -> [a] -> b 
