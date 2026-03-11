@@ -4,7 +4,7 @@
 
 module Pr01_2 where
 import GHC.Base (BCO, DoubleBox)
-import Distribution.Simple.LocalBuildInfo (prefixRelativeComponentInstallDirs)
+--import Distribution.Simple.LocalBuildInfo (prefixRelativeComponentInstallDirs)
 --import Lec04 (Ingredients(BakingPowder))
 --import Lec04 (CakeDough(ChocolateCakeDough))
 
