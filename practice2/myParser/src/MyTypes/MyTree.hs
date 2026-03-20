@@ -4,9 +4,13 @@ import Data.Functor as FO()
 import Data.Monoid as M() 
 
 data MyTree a = Leaf a | Node a (MyTree a)(MyTree a) deriving (Show,Eq)
-instance Functor MyTree where 
+instance Functor MyTree where
     fmap f (Leaf a) = Leaf (f a)
-    fmap f (Node x y z) = Node (f x) (fmap f y)(fmap f z) 
+    fmap f (Node x y z) = Node (f x) (fmap f y)(fmap f z)
+
+instance Foldable MyTree where
+    foldMap f (Leaf a)         = f a
+    foldMap f (Node a left right) = f a <> foldMap f left <> foldMap f right
 tstffs1 = fmap (+1) (Leaf 1)
 tstffs2= fmap (+2) (Node 4 (Leaf 1) (Node 4 (Leaf 1)(Leaf 3)))
 instance Applicative MyTree where 

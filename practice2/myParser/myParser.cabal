@@ -25,12 +25,11 @@ source-repository head
 
 library
   exposed-modules:
-      -MyTypes.MyTree -MyTypes.MyMaybe -Mytypes.MyEither
+      MyTypes.MyTree
+      MyTypes.MyMaybe
+      MyTypes.MyEither
   other-modules:
       Lib
-      MyTypes.MyEither
-      MyTypes.MyMaybe
-      MyTypes.MyTree
       Paths_myParser
   autogen-modules:
       Paths_myParser
