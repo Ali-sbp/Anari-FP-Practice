@@ -39,7 +39,9 @@ library:
     - MyTypes.MyTree
     - MyTypes.MyMaybe
     - MyTypes.MyEither
-
+    - MyParsers.MyParser
+    - MyParsers.MyParsec
+    - MyParsers.MyAttoparsec
 executables:
   myParser-exe:
     main:                Main.hs

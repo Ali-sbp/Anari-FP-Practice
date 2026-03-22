@@ -28,6 +28,9 @@ library
       MyTypes.MyTree
       MyTypes.MyMaybe
       MyTypes.MyEither
+      MyParsers.MyParser
+      MyParsers.MyParsec
+      MyParsers.MyAttoparsec
   other-modules:
       Lib
       Paths_myParser

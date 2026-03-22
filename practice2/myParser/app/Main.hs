@@ -3,6 +3,7 @@ module Main (main) where
 import MyTypes.MyTree
 import MyTypes.MyMaybe
 import MyTypes.MyEither
+import MyParsers.MyParser
 
 
 main :: IO ()
@@ -20,3 +21,16 @@ main = do
   -- MyEither
   putStrLn (show (fmap (*2) (MyRight 21) :: MyEither String Int))
   putStrLn (show (MyLeft "err1" <> MyLeft "err2" :: MyEither String String))
+
+  --MyParser 
+  putStrLn "MyParser:"
+  putStrLn $ show (runParser plusOrMult "12*345dsf")
+  putStrLn $ show (runParser plusOrMult "12+345dsf")
+    {-
+  putStrLn "Parsec:"
+  putStrLn $ show (runParser plusOrMultParsec "12*345dsf")
+  putStrLn $ show (runParser plusOrMultParsec "12+345dsf")
+  putStrLn "Attoparsec:"
+  putStrLn $ show (runParser plusOrMultAttoparsec "12*345dsf")
+  putStrLn $ show (runParser plusOrMultAttoparsec "12+345dsf")
+    -}
