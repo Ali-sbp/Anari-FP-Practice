@@ -1,3 +1,4 @@
+--practiced for MyAttoparsec.hs
 import Data.Attoparsec.Text (Parser, parseOnly, digit, char, many1)
 --import Data.Text.Internal
 import Control.Applicative ((<|>))
