@@ -1,1 +1,1 @@
-module MyParsers.MyParsec where
+module MyParsers.MyParsec () where

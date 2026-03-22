@@ -1,4 +1,4 @@
-module MyParsers.MyParser where
+module MyParsers.MyParser (runParser,charA, satisfy, char, lower, upper, digit, multiplication, lowers, digits, finalMult,finalPlus,plusOrMult) where
 
 import MyTypes.MyMaybe (MyMaybe(..))
 
