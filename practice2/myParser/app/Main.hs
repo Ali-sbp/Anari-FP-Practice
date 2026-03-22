@@ -4,7 +4,8 @@ import MyTypes.MyTree
 import MyTypes.MyMaybe
 import MyTypes.MyEither
 import MyParsers.MyParser
-
+import MyParsers.MyParsec (plusOrMultParsec, runParser')
+import MyParsers.MyAttoparsec(plusOrMultAttoparsec, runParser'')
 
 main :: IO ()
 main = do
@@ -26,11 +27,12 @@ main = do
   putStrLn "MyParser:"
   putStrLn $ show (runParser plusOrMult "12*345dsf")
   putStrLn $ show (runParser plusOrMult "12+345dsf")
-    {-
+    
   putStrLn "Parsec:"
-  putStrLn $ show (runParser plusOrMultParsec "12*345dsf")
-  putStrLn $ show (runParser plusOrMultParsec "12+345dsf")
+  putStrLn $ show (runParser' plusOrMultParsec "12*345dsf")
+  putStrLn $ show (runParser' plusOrMultParsec "12+345dsf")
+  
   putStrLn "Attoparsec:"
-  putStrLn $ show (runParser plusOrMultAttoparsec "12*345dsf")
-  putStrLn $ show (runParser plusOrMultAttoparsec "12+345dsf")
-    -}
+  putStrLn $ show (runParser'' plusOrMultAttoparsec "12*345dsf")
+  putStrLn $ show (runParser'' plusOrMultAttoparsec "12+345dsf")
+    

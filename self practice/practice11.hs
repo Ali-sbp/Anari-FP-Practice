@@ -1,8 +1,7 @@
-module MyParsers.MyParsec (plusOrMultParsec, runParser') where
+module MyParsers.MyParsec () where
 
 
-import Text.Parsec (Parsec, parse, digit, char, many1,try,ParseError,(<|>))
---importing ParseError for runParser helper to make it look clean
+import Text.Parsec (Parsec, parse, digit, char, many1,try,ParseError ,(<|>))
 import Text.Parsec.String (Parser)  -- Parser = Parsec String () a
 import Data.Char (digitToInt)
  
@@ -21,11 +20,11 @@ plusOrMultParsec :: Parser Int
 plusOrMultParsec = try multP <|> plusP
 
 --helper to keep the integrity of main
-runParser' :: Parser Int -> String -> Either ParseError Int 
-runParser' p input = parse p "" input 
+runParser :: Parser Int -> String -> Either ParseError Int 
+runParser p input = parse p "" input 
 
 
-tst1 = runParser' plusOrMultParsec "12*345asd"
+tst1 = runParser plusOrMultParsec "12*345asd"
 
 {-
 ghci> :t parse

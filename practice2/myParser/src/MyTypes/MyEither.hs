@@ -10,7 +10,8 @@ instance Foldable (MyEither e) where
     foldr _ x (MyLeft _) = x
     foldr f x (MyRight y) = f y x
 
-tst1 = foldr (+) 0 (MyRight 5)
+tst1 :: Integer --wtf is this annoying warningggggg
+tst1 = foldr (+) 0 (MyRight 5) 
 tst2 = foldr (+) 0 (MyLeft "err")
 tst3 = foldMap show (MyRight 42)
 
