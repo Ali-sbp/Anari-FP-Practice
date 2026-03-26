@@ -1,13 +1,15 @@
 module MyTypes.MyMaybe where
-import Data.Functor as FO ()
-import Data.Monoid as MN
+import Data.Functor as FO 
+import Data.Monoid as MN 
+
 
 data MyMaybe a = MyNothing | MyJust a  deriving (Show,Eq,Ord)
 
 instance Foldable MyMaybe where
     foldr _ x MyNothing = x
     foldr f x (MyJust y) = f y x
-
+    --foldl f x (MyJust y) = f x y ??? just out of curiocity
+    --foldMap f x = 
 tst1 = foldr (+) 0 (MyJust 5)
 tst2 = foldr (+) 0 MyNothing
 tst3 = foldMap show (MyJust 42)
@@ -63,6 +65,8 @@ ghci> foldr (+) 0 (MyJust 5)
 5
 ghci> foldr (+) 0 MyNothing
 0
+ghci> getSum $ foldMap (Sum . (+1)) [1,2,3]
+9
 
 -- Semigroup: (<>), sconcat, stimes
 ghci> MyJust "hi" <> MyJust "!"
