@@ -68,6 +68,7 @@ instance Ord MyEvolution where
     compare Australopithecine _ = LT
     compare _ Australopithecine = GT
     compare Humans Humans = EQ
+    --compare x y = compare (fromEnum x) (fromEnum y) why didn't we do this ... :((
 
 instance Enum MyEvolution where 
     fromEnum LUCA                = 0
