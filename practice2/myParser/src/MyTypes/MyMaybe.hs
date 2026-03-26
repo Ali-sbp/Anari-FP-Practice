@@ -12,8 +12,11 @@ tst2 = foldr (+) 0 MyNothing
 tst3 = foldMap show (MyJust 42)
 
 instance Semigroup a => Semigroup (MyMaybe a) where
-    MyNothing <> _ = MyNothing
-    _ <> MyNothing = MyNothing
+
+    -- MyNothing <> _ = MyNothing at first I made them this way but this breaks the monoid law. 
+    -- _ <> MyNothing = MyNothing
+    MyNothing <> x = x
+    x <> MyNothing = x
     (MyJust x) <> (MyJust y) = MyJust (x <> y)
 
 tst4 = MyJust "hi" <> MyJust "!"
@@ -73,10 +76,14 @@ MyJust "hahaha"
 -- Monoid: mappend, mconcat
 ghci> mappend (MyJust "a") (MyJust "b")
 MyJust "ab"
-ghci> mappend MyNothing (MyJust "b")
+ghci> mappend MyNothing (MyJust "b") THIS WAS THE FIRST IMPLEMENTATION WHICH BREAKS MONOID LAWW !!!!!
 MyNothing
-ghci> mconcat [MyJust "a", MyJust "b", MyNothing]
+ghci> mempty <> MyJust "asd" corrected version
+MyJust "asd"
+ghci> mconcat [MyJust "a", MyJust "b", MyNothing] SAME HERE !!!
 MyNothing
+ghci> mconcat [MyJust "a", MyJust "b", MyNothing] corrected version
+MyJust "ab"
 ghci> mconcat [MyJust [1], MyJust [2], MyJust [3]]
 MyJust [1,2,3]
 
