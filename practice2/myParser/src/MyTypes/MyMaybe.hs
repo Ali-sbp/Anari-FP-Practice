@@ -66,8 +66,10 @@ ghci> foldr (+) 0 MyNothing
 -- Semigroup: (<>), sconcat, stimes
 ghci> MyJust "hi" <> MyJust "!"
 MyJust "hi!"
-ghci> MyNothing <> MyJust [1,2]
+ghci> MyNothing <> MyJust [1,2] again wthe wrong version , fr last implementation! breaks monoid Rule
 MyNothing
+ghci> MyNothing <> MyJust [1,2]
+MyJust [1,2]
 ghci> sconcat (MyJust "a" :| [MyJust "b", MyJust "c"])
 MyJust "abc"
 ghci> stimes 3 (MyJust "ha")
