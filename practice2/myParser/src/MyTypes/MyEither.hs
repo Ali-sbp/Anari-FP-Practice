@@ -9,6 +9,8 @@ data MyEither e a = MyLeft e | MyRight a deriving Show
 instance Foldable (MyEither e) where
     foldr _ x (MyLeft _) = x
     foldr f x (MyRight y) = f y x
+    --foldMap _ (MyLeft _) = mempty
+    --foldMap f (MyRight y) = f y 
 
 tst1 :: Integer --wtf is this annoying warningggggg
 tst1 = foldr (+) 0 (MyRight 5) 
