@@ -1,5 +1,6 @@
 module MyTypes.MyMaybe where
 import Data.Functor as FO ()
+import Data.Monoid as MN
 
 data MyMaybe a = MyNothing | MyJust a  deriving (Show,Eq,Ord)
 
@@ -68,7 +69,7 @@ ghci> MyJust "hi" <> MyJust "!"
 MyJust "hi!"
 ghci> MyNothing <> MyJust [1,2] again wthe wrong version , fr last implementation! breaks monoid Rule
 MyNothing
-ghci> MyNothing <> MyJust [1,2]
+ghci> MyNothing <> MyJust [1,2] corrected version
 MyJust [1,2]
 ghci> sconcat (MyJust "a" :| [MyJust "b", MyJust "c"])
 MyJust "abc"
