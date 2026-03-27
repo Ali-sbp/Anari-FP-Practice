@@ -82,4 +82,16 @@ plusOrMult :: Parser Char Int
 plusOrMult = finalMult <|> finalPlus 
 
 
+--digits' :: Parser Char Int 
+--digits' = (\x y-> x*10 + y) <$> digit <*> digits' <|> 0 
 
+{-
+some :: f a -> f [a]
+some v = (:) <$> v <*> many v
+
+many :: f a -> f [a]  :              one or more  : parse v , then zero-or-more
+many v = some v <|> pure []          zero or more : try some, or return p[]
+
+optional :: Alternative f => f a -> f (Maybe a)
+optional v = Just <$> v <|> pure Nothing : try v , wrap in Just or return Nothing
+-}
