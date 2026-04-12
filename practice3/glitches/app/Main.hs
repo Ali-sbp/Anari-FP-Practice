@@ -46,14 +46,15 @@ randomReplaceByte bytes = do
     return (replaceByte location chV bytes)
 
 --glitch 2: 
--- 
+-- random sort section, 
 randomChar :: IO Char
 randomChar = do
     randomInt <- randomRIO (0,255)
     return (toEnum randomInt)
+    
 randomSortSection :: BC.ByteString -> IO BC.ByteString
 randomSortSection bytes = do 
-    let sectionSize = 25 
+    let sectionSize = 25
     let bytesLength = BC.length bytes
     start <- randomRIO (0,bytesLength - sectionSize)
     return (sortSection start sectionSize bytes)
