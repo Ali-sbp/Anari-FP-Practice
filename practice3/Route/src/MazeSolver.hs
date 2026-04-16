@@ -5,7 +5,7 @@ import qualified Data.Map.Strict as M
 import qualified Data.Set as S
 
 -- using Map.Map String [String] O(log n) instead of just a [(Strung, String)] O(n)
--- but the idea for a maze is (String, [String]) : (current room, accessible rooms)
+-- but the idea for a maze is (String, [String]) : (current room, [accessible rooms])
 
 type Maze = M.Map String [String]
 
@@ -13,7 +13,7 @@ type Maze = M.Map String [String]
 -- using set here for state RWS r w s a , s :: Set.Set String, for the state.
 
 type Solver a = R.RWS Maze [String] (S.Set String) a 
-
+--just a sample maze for testing
 sampleMaze :: Maze
 sampleMaze = M.fromList
     [ ("start",  ["roomA", "roomB"])
