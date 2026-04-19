@@ -1,0 +1,6 @@
+start hallway
+hallway start library garden
+library hallway finish
+garden hallway
+finish
+

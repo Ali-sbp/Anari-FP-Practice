@@ -1,6 +1,7 @@
-module MyTransformerStack where 
-    
-import Control.Monad.Identity
+{-# LANGUAGE InstanceSigs #-}
+module MyTransformerStack where
+
+import Data.Functor.Identity
 
 -- ReaderT copied from my practice file 
 newtype ReaderT r m a = ReaderT { runReaderT :: r -> m a }
@@ -122,3 +123,5 @@ modify f = MyStateT $ \s -> return ((), f s)
 --tst1 :: (Int, Int)
 tst1 = runIdentity $ runMyStateT (do { put 10; modify (*3); x <- get; return x }) 0 
 
+
+-- game sta

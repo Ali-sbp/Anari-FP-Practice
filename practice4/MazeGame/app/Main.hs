@@ -1,6 +1,8 @@
 module Main (main) where
 
-import Lib
+import GameEngine
 
 main :: IO ()
-main = someFunc
+main = do
+    maze <- loadMaze "maze.txt"
+    runGame gameLoop maze
