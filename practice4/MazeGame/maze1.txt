@@ -1,0 +1,22 @@
+start gatehouse
+gatehouse start mainHall
+mainHall gatehouse library armory garden
+library mainHall readingRoom
+readingRoom library
+armory mainHall dungeon barracks
+barracks armory
+dungeon armory secretTunnel
+secretTunnel dungeon ancientHall
+garden mainHall greenhouse fountain
+greenhouse garden
+fountain garden courtyard
+courtyard fountain stables village
+stables courtyard
+village courtyard inn market
+market village
+inn village chapel
+chapel inn crypt ancientHall
+crypt chapel
+ancientHall secretTunnel chapel throne
+throne ancientHall finish
+finish
