@@ -96,3 +96,19 @@ moved: dungeon -> secretTunnel
 moved: secretTunnel -> ancientHall
 moved: ancientHall -> throne
 moved: throne -> finish
+
+=== New Game ===
+
+=== New Game ===
+moved: start -> hallway
+moved: hallway -> garden
+moved: garden -> hallway
+moved: hallway -> library
+moved: library -> finish
+
+=== New Game ===
+moved: start -> hallway
+moved: hallway -> garden
+moved: garden -> hallway
+moved: hallway -> library
+moved: library -> finish
